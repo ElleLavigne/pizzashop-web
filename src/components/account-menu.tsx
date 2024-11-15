@@ -13,17 +13,22 @@ import { getProfile } from "@/api/get-profile";
 import { Skeleton } from "./ui/skeleton";
 import { Dialog, DialogTrigger } from "./ui/dialog";
 import { StoreProfileDialog } from "./store-profile-dialog";
+import { getManagerRestaurant } from "@/api/get-managed-restaurant";
 
 export function AccountMenu() {
   const { data: profile, isLoading: isLoadingProfile } = useQuery({
     queryKey: ["profile"],
     queryFn: getProfile,
+    staleTime: Infinity,
+
   });
 
   const { data: managedRestaurant, isLoading: isLoadingManagedRestaurant } =
     useQuery({
       queryKey: ["managed-restaurant"],
-      queryFn: getProfile,
+      queryFn: getManagerRestaurant,
+      staleTime: Infinity,
+
     });
   return (
 

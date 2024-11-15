@@ -11,6 +11,8 @@ import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
 import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "@/api/get-profile";
 import { Skeleton } from "./ui/skeleton";
+import { Dialog, DialogTrigger } from "./ui/dialog";
+import { StoreProfileDialog } from "./store-profile-dialog";
 
 export function AccountMenu() {
   const { data: profile, isLoading: isLoadingProfile } = useQuery({
@@ -24,6 +26,9 @@ export function AccountMenu() {
       queryFn: getProfile,
     });
   return (
+
+    <Dialog>
+
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
@@ -55,10 +60,13 @@ export function AccountMenu() {
           )}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+          <DialogTrigger asChild>
         <DropdownMenuItem>
           <Building className="mr-2 h-4 w-4" />
           <span>Perfil da loja</span>
         </DropdownMenuItem>
+        </DialogTrigger>
+
         {/* // */}
         <DropdownMenuItem className="text-rose-500 dark:text-rose-400">
           <LogOut className="mr-2 h-4 w-4" />
@@ -66,5 +74,8 @@ export function AccountMenu() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+    <StoreProfileDialog/>
+    </Dialog>
+
   );
 }
